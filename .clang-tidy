@@ -34,21 +34,32 @@ Checks: >
 WarningsAsErrors: "*"
 
 # Common C++ file extensions
-ImplementationFileExtensions: ['cpp', 'cxx']
-HeaderFileExtensions: ['h', 'hpp', 'hxx']
-HeaderFilterRegex: '.*'
+ImplementationFileExtensions: ["c", "cc", "cpp", "cxx"]
+HeaderFileExtensions: ["h", "hpp", "hxx"]
+HeaderFilterRegex: ".*"
 
 CheckOptions:
-    - { key: readability-identifier-naming.ClassCase,                 value: CamelCase  }
-    - { key: readability-identifier-naming.StructCase,                value: CamelCase  }
-    - { key: readability-identifier-naming.EnumCase,                  value: CamelCase  }
-    - { key: readability-identifier-naming.EnumConstantCase,          value: kCamelCase }
-    - { key: readability-identifier-naming.TemplateParameterCase,     value: CamelCase  }
-    - { key: readability-identifier-naming.FunctionCase,              value: camelBack  }
-    - { key: readability-identifier-naming.GlobalConstantCase,        value: kCamelCase }
-    - { key: readability-identifier-naming.GlobalVariableCase,        value: snake_case_}
-    - { key: readability-identifier-naming.MemberCase,                value: snake_case_}
-    - { key: readability-identifier-naming.ParameterCase,             value: snake_case }
-    - { key: readability-identifier-naming.VariableCase,              value: snake_case }
-    - { key: performance-move-const-arg.CheckTriviallyCopyableMove,   value: 'false'    }
-
+    - { key: readability-identifier-naming.ClassCase, value: CamelCase }
+    - { key: readability-identifier-naming.StructCase, value: CamelCase }
+    - { key: readability-identifier-naming.EnumCase, value: CamelCase }
+    - { key: readability-identifier-naming.EnumConstantCase, value: kCamelCase }
+    - {
+          key: readability-identifier-naming.TemplateParameterCase,
+          value: CamelCase,
+      }
+    - { key: readability-identifier-naming.FunctionCase, value: camelBack }
+    - {
+          key: readability-identifier-naming.GlobalConstantCase,
+          value: kCamelCase,
+      }
+    - {
+          key: readability-identifier-naming.GlobalVariableCase,
+          value: snake_case_,
+      }
+    - { key: readability-identifier-naming.MemberCase, value: snake_case_ }
+    - { key: readability-identifier-naming.ParameterCase, value: snake_case }
+    - { key: readability-identifier-naming.VariableCase, value: snake_case }
+    - {
+          key: performance-move-const-arg.CheckTriviallyCopyableMove,
+          value: "false",
+      }

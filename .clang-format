@@ -54,6 +54,7 @@ IncludeBlocks: Regroup
 IndentAccessModifiers: false
 IndentWidth: 4
 IndentPPDirectives: AfterHash
+Language: Cpp
 NamespaceIndentation: None
 PointerAlignment: Left
 SortIncludes: Never
@@ -64,4 +65,3 @@ SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyBlock: false
 Standard: Latest
-

@@ -9,7 +9,6 @@ string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
 string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
 
 # --------------- Build Guards ---------------
-
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     message(
         FATAL_ERROR
@@ -20,7 +19,6 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # --------------- Set CMake Options ---------------
-
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -53,7 +51,6 @@ include(cmake/static_analyzer.cmake)
 include(cmake/compiler_warning.cmake)
 
 # --------------- Set Output Directory ---------------
-
 if(DEFINED PRESET_NAME AND NOT PRESET_NAME STREQUAL "")
     set(OUTPUT_DIR ${PRESET_NAME})
 else()
@@ -95,11 +92,9 @@ foreach(OUTPUT_CONFIG ${CMAKE_CONFIGURATION_TYPES})
 endforeach()
 
 # --------------- Thirdparty ---------------
-
 include(cmake/thirdparty.cmake)
 
 # --------------- Source ---------------
-
 set(PROJECT_TARGETS "")
 
 add_executable(${PROJECT_NAME_LOWER}-app "")
@@ -114,6 +109,7 @@ target_include_directories(${PROJECT_NAME_LOWER}-app
 target_link_libraries(${PROJECT_NAME_LOWER}-app
     PRIVATE
 )
+
 if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME_LOWER}-app
         PRIVATE
@@ -124,35 +120,42 @@ endif()
 list(APPEND PROJECT_TARGETS ${PROJECT_NAME_LOWER}-app)
 
 # --------------- Testing ---------------
-
 if(${PROJECT_NAME_UPPER}_ENABLE_TESTING)
     enable_testing()
+    include(GoogleTest)
 
-    # add_executable(${PROJECT_NAME_LOWER}-test "")
-    # target_sources(${PROJECT_NAME_LOWER}-test
-    #     PRIVATE
-    #     ${TEST_SOURCE}
-    # )
-    # target_include_directories(${PROJECT_NAME_LOWER}-test
-    #     PRIVATE
-    #     ${CMAKE_SOURCE_DIR}/src
-    #     ${CMAKE_SOURCE_DIR}/test
-    # )
-    # target_link_libraries(${PROJECT_NAME_LOWER}-test
-    #     PRIVATE
-    # )
-    # if (UNIX AND NOT APPLE)
-    #     target_link_libraries(${PROJECT_NAME_LOWER}-test
-    #         PRIVATE
-    #         pthread
-    #     )
-    # endif ()
-    #
-    # list(APPLE PROJECT_TARGETS ${PROJECT_NAME_UPPER}-test)
+    add_executable(${PROJECT_NAME_LOWER}-test "")
+    target_sources(${PROJECT_NAME_LOWER}-test
+        PRIVATE
+        ${TEST_SOURCE}
+    )
+    target_include_directories(${PROJECT_NAME_LOWER}-test
+        PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/test
+    )
+    target_link_libraries(${PROJECT_NAME_LOWER}-test
+        PRIVATE
+
+        # GTest::gtest
+        GTest::gtest_main
+
+        # GTest::gmock
+        GTest::gmock_main
+    )
+
+    if(UNIX AND NOT APPLE)
+        target_link_libraries(${PROJECT_NAME_LOWER}-test
+            PRIVATE
+            pthread
+        )
+    endif()
+
+    gtest_discover_tests(${PROJECT_NAME_LOWER}-test)
+    list(APPEND PROJECT_TARGETS ${PROJECT_NAME_LOWER}-test)
 endif()
 
 # --------------- Set Building Options ---------------
-
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
@@ -204,7 +207,6 @@ foreach(TARGET ${PROJECT_TARGETS})
 endforeach()
 
 # --------------- Results ---------------
-
 message(STATUS "------------------")
 message(STATUS "Configure Result: ")
 message(STATUS "------------------")
@@ -236,4 +238,3 @@ message(STATUS "Enable Testing: ${${PROJECT_NAME_UPPER}_ENABLE_TESTING}")
 message(STATUS "Enable Code Coverage: ${${PROJECT_NAME_UPPER}_ENABLE_CODE_COVERAGE}")
 message(STATUS "Enable LTO: ${${PROJECT_NAME_UPPER}_ENABLE_LTO}")
 message(STATUS "Enable Address Sanitizer: ${${PROJECT_NAME_UPPER}_ENABLE_ASAN}")
-

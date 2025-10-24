@@ -12,7 +12,7 @@ echo "-- Generating $OUTPUT_FILE ..."
 
 APP_DIR="$ROOT_DIR/src/app"
 echo "set(APP_SOURCE" >> "$OUTPUT_FILE"
-find "$APP_DIR" -type f \( -name "*.h" -o -name "*.hxx" -o -name "*.cpp" -o -name "*.cxx" \) | while read -r FILE_PATH; do
+find "$APP_DIR" -type f \( -name "*.h" -o -name "*.hxx" -o -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.cxx" \) | while read -r FILE_PATH; do
     RELATIVE_PATH="${FILE_PATH#"$ROOT_DIR"/}"
     RELATIVE_PATH="${RELATIVE_PATH//\\//}"
     echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
@@ -23,7 +23,7 @@ echo ")" >> "$OUTPUT_FILE"
 
 TEST_DIR="$ROOT_DIR/test"
 echo "set(TEST_SOURCE" >> "$OUTPUT_FILE"
-find "$TEST_DIR" -type f \( -name "*.h" -o -name "*.hxx" -o -name "*.cpp" -o -name "*.cxx" \) | while read -r FILE_PATH; do
+find "$TEST_DIR" -type f \( -name "*.h" -o -name "*.hxx" -o -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.cxx" \) | while read -r FILE_PATH; do
     RELATIVE_PATH="${FILE_PATH#"$ROOT_DIR"/}"
     RELATIVE_PATH="${RELATIVE_PATH//\\//}"
     echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
