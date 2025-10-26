@@ -18,9 +18,11 @@ public:
     }
 
     void monitor();
+    void addCommand(std::unique_ptr<ICommand>&& command);
+    [[nodiscard]] size_t getCommandsSize() const { return commands_.size(); }
 
 private:
-    std::vector<ICommand> commands_;
+    std::vector<std::unique_ptr<ICommand>> commands_;
     std::unique_ptr<IAlert> alert_;
 };
 
