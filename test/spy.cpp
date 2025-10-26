@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <print>
+#include <string>
 #include <string_view>
 
 #include "lib/door_command.h"

@@ -13,6 +13,7 @@ set(APP_SOURCE
 )
 set(TEST_SOURCE
   ${CMAKE_SOURCE_DIR}/test/stub.cpp
+  ${CMAKE_SOURCE_DIR}/test/fake.cpp
   ${CMAKE_SOURCE_DIR}/test/dummy.cpp
   ${CMAKE_SOURCE_DIR}/test/spy.cpp
 )
