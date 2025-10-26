@@ -97,6 +97,28 @@ include(cmake/thirdparty.cmake)
 # --------------- Source ---------------
 set(PROJECT_TARGETS "")
 
+add_library(${PROJECT_NAME_LOWER}-lib STATIC "")
+target_sources(${PROJECT_NAME_LOWER}-lib
+    PRIVATE
+    ${LIB_SOURCE}
+)
+target_include_directories(${PROJECT_NAME_LOWER}-lib
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+target_link_libraries(${PROJECT_NAME_LOWER}-lib
+    PRIVATE
+)
+
+if(UNIX AND NOT APPLE)
+    target_link_libraries(${PROJECT_NAME_LOWER}-lib
+        PRIVATE
+        pthread
+    )
+endif()
+
+list(APPEND PROJECT_TARGETS ${PROJECT_NAME_LOWER}-lib)
+
 add_executable(${PROJECT_NAME_LOWER}-app "")
 target_sources(${PROJECT_NAME_LOWER}-app
     PRIVATE
@@ -108,6 +130,7 @@ target_include_directories(${PROJECT_NAME_LOWER}-app
 )
 target_link_libraries(${PROJECT_NAME_LOWER}-app
     PRIVATE
+    ${PROJECT_NAME_LOWER}-lib
 )
 
 if(UNIX AND NOT APPLE)
@@ -136,6 +159,7 @@ if(${PROJECT_NAME_UPPER}_ENABLE_TESTING)
     )
     target_link_libraries(${PROJECT_NAME_LOWER}-test
         PRIVATE
+        ${PROJECT_NAME_LOWER}-lib
 
         # GTest::gtest
         GTest::gtest_main

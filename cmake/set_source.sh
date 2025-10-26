@@ -8,6 +8,17 @@ OUTPUT_FILE="$ROOT_DIR/cmake/source.cmake"
 
 echo "-- Generating $OUTPUT_FILE ..."
 
+# --- src/lib/ ---
+
+LIB_DIR="$ROOT_DIR/src/lib"
+echo "set(LIB_SOURCE" >> "$OUTPUT_FILE"
+find "$LIB_DIR" -type f \( -name "*.h" -o -name "*.hxx" -o -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.cxx" \) | while read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#"$ROOT_DIR"/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
 # --- src/app/ ---
 
 APP_DIR="$ROOT_DIR/src/app"

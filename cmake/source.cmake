@@ -1,3 +1,13 @@
+set(LIB_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/lib/i_command.h
+  ${CMAKE_SOURCE_DIR}/src/lib/result.h
+  ${CMAKE_SOURCE_DIR}/src/lib/door_command.cpp
+  ${CMAKE_SOURCE_DIR}/src/lib/i_door.h
+  ${CMAKE_SOURCE_DIR}/src/lib/door_command.h
+  ${CMAKE_SOURCE_DIR}/src/lib/i_alert.h
+  ${CMAKE_SOURCE_DIR}/src/lib/server.h
+  ${CMAKE_SOURCE_DIR}/src/lib/server.cpp
+)
 set(APP_SOURCE
   ${CMAKE_SOURCE_DIR}/src/app/main.cpp
 )

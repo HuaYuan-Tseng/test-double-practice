@@ -1,6 +1,8 @@
 .idea
 .vs
 .vscode
+.cache
 bin/
 build/
 tmp/
+compile_commands.json
