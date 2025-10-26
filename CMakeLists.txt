@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(cpp-template
+project(test-double-practice
     VERSION 0.0.1
     LANGUAGES C CXX
 )

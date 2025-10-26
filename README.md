@@ -39,9 +39,8 @@
 
 ### 執行應用程式
 
-```bash
-./bin/<preset name>/cpp-template-app
-```
+> [!NOTE]
+> 由於是練習 Test Double 的專案，因此該專案的執行檔不需要看：）
 
 ## 執行測試
 
@@ -54,7 +53,7 @@ ctest --preset <preset name>
 或直接執行測試執行檔：
 
 ```bash
-./bin/<preset name>/cpp-template-test
+./bin/<preset name>/test-double-practice-test
 ```
 
 ## 目錄結構
@@ -81,6 +80,15 @@ ctest --preset <preset name>
 │   └── hello_test.cxx      # 範例測試
 └── thirdparty/             # 第三方函式庫
 ```
+
+## 關於 Mock 的二三事
+
+- Mock 是一種測試替身（Test Double），主要用於驗證物件之間的互動行為
+- Mock vs 其他 Test Double
+  - Stub：只提供預設回傳值，不驗證互動
+  - Spy：記錄呼叫歷史，事後查詢
+  - Mock：預先設定期望，自動驗證是否符合預期
+- Mock 最適合用於測試「A 物件是否正確地呼叫了 B 物件的方法」這類行為驗證場景
 
 ## 授權條款
 
