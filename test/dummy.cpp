@@ -6,7 +6,7 @@
 
 /*
  * 題目：
- * 使用 `Dummy` 實作 `ICommand`，測試 `Server.getCommandSize` 函式
+ * 使用 `Dummy` 實作 `ICommand`，測試 `Server.getCommandSize()`
  */
 
 class DummyCommand final : public lib::ICommand {
@@ -14,7 +14,7 @@ public:
     lib::Result execute() override { return { lib::ResultEnum::kOK, "Dummy" }; }
 };
 
-TEST(Dummy, testCommandSize)
+TEST(Dummy, getCommandSize)
 {
     lib::Server server(nullptr);
     EXPECT_EQ(0, server.getCommandsSize());
