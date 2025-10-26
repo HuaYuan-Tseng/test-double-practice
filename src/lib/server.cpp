@@ -14,7 +14,7 @@ void Server::monitor()
                           [this](const std::unique_ptr<ICommand>& command)
                           {
                               Result res = command->execute();
-                              if (res.status() == static_cast<int>(ResultEnum::kOK))
+                              if (res.status() != static_cast<int>(ResultEnum::kOK))
                               {
                                   alert_->sendAlert(res.message());
                               }
